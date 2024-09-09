@@ -5,12 +5,12 @@ import numpy as np
 import itertools
 import matplotlib.pyplot as plt
 
-xmin = -4.0
-xmax = 4.0
-ymin = -4.0
-ymax = 4.0
+xmin = -2.5
+xmax = 2.5
+ymin = -2.5
+ymax = 2.5
 
-num_points = 10000
+num_points = 2 ** 14
 
 re = np.linspace(xmin, xmax, num_points)
 im = np.linspace(ymin, ymax, num_points)
@@ -23,9 +23,9 @@ a = np.zeros_like(c)
 list_out = np.zeros((num_points ** 2), dtype=int)
 
 
-num_iterations = 5000
+num_iterations = 2 ** 10
 
-for z in range(num_iterations):
+for z in range(1, num_iterations+1):
     # square and self add
     a = (a ** 2) + c
 
@@ -36,13 +36,17 @@ for z in range(num_iterations):
     list_out[out_this_round] = z
 
     # set the points in the matrix to 0,0 so they dont get caught again
-    a[out_this_round] = complex(0, 0)
+    c[out_this_round] = complex(0, 0)
 
 
-    print(f'Done {z+1:,} of {num_iterations:,}', end='\r')
+    print(f'Done {z:,} of {num_iterations:,}', end='\r')
 
 
 img = list_out.reshape((num_points, num_points), order='f')
+
+# points that are 0 in the image never escaped the bound and are in the M set for this number of iterations.
+# set to indicate and make visualisation easier
+img[img==0] = num_iterations+1
 
 
 # save the array
