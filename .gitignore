@@ -1,6 +1,9 @@
 .venv/
+data/
 __pycache__/
 *.png
+*.jpg
+*.svg
 *.xcf
 *.npz
 *.npy
