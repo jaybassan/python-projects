@@ -4,3 +4,4 @@ __pycache__/
 *.xcf
 *.npz
 *.npy
+*.csv
