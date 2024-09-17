@@ -35,6 +35,10 @@ dpi = 1800
 lw_clip = 15_000
 lw_exponent = 0.7
 
+xmin = -5e6
+xmax = 5e6
+ymin = -5e6
+ymax = 5e6
 
 # read the rivers, lakes, and country shape files
 rivers = gpd.read_file(f'./data/processed/rivers_{river_size}.shp')
@@ -70,8 +74,8 @@ canada.plot(
     ax=ax,
     color='k',
 )
-plt.xlim(-5e6, 5e6)
-plt.ylim(-5e6, 5e6)
+plt.xlim(xmin, xmax)
+plt.ylim(ymin, ymax)
 plt.tight_layout()
 ax.axis('off')
 plt.savefig(f'./images/{country}_{dpi}dpi.png', bbox_inches='tight')
